@@ -1,0 +1,8 @@
+# composer плюшки
+/controller/vendor/**
+# кеш шаблонов
+/view/cache/**
+# параметры
+.env
+# бекапы
+*.bak
