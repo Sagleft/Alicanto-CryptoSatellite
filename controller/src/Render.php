@@ -2,10 +2,13 @@
 	namespace Alicanto;
 	
 	class Render {
-		private $data_wrap = ['page' => []];
+		private $data_wrap = [
+			'page'    => [],
+			'version' => 1
+		];
 		
 		public function __construct($data) {
-			$this->data_wrap = ['page' => $data];
+			$this->data_wrap = ['page' => $data, 'version' => getenv('version')];
 		}
 		
 		function twigRender() {
