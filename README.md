@@ -5,6 +5,10 @@
 
 Может применяться как замена Litesight-api для веб-кошельков.
 
+## Ahtung
+
+Это пока альфа версия.
+
 ## Требования
 
 * PHP 7.1;
@@ -16,7 +20,6 @@
 git clone https://github.com/Sagleft/Alicanto-CryptoSatellite.git alicanto
 cd alicanto
 mkdir view/cache
-sh model/increment_version.sh
 cd controller
 composer update
 ```
