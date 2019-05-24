@@ -16,6 +16,7 @@
 git clone https://github.com/Sagleft/Alicanto-CryptoSatellite.git alicanto
 cd alicanto
 mkdir view/cache
+sh model/increment_version.sh
 cd controller
 composer update
 ```
