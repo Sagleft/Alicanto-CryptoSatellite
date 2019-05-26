@@ -2,6 +2,8 @@
 	namespace Alicanto;
 	
 	class Utilities {
+		function isJson($string) { return ((is_string($string) && (is_object(json_decode($string)) || is_array(json_decode($string))))) ? true : false; }
+		
 		function data_filter($string, $useDB = false, $db = null) {
 			$string = strip_tags($string);
 			$string = stripslashes($string);
