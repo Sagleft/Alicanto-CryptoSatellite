@@ -6,11 +6,30 @@
 		//private $utils = null;
 		
 		public function __construct() {
-			//use \Alicanto\Utilities as AppUtils;
-			//$this->utils = new AppUtils();
-			//\Alicanto\Utilities::data_filter
-			
 			$this->cryptoID_url = "https://chainz.cryptoid.info/" . getenv('cryptoID_coin') . "/api.dws?key=" . getenv('cryptoID_key');
+		}
+		
+		function validateAddress($address) {
+			/* $result = $this->coin_connection->validateaddress($address);
+			if($result['isvalid'] == true) {
+				return true;
+			} else {
+				return false;
+			} */
+			//придется подключаться каждый раз при проверке
+			if($address[0] == 'M' && strlen($address) == 34) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
+		function showError($info) {
+			exit(json_encode([
+				'status' => 'error',
+				'data'   => [],
+				'error'  => $info
+			]));
 		}
 		
 		function coin_connect() {
@@ -21,11 +40,18 @@
 				'user'     => getenv('rpc_user'), // required
 				'password' => getenv('rpc_pass')  // required
 			]); */
+			//простые решения зачастую работают стабильнее
 			require_once __DIR__ . "/../src/coinrpc.php";
 			$this->coin_connection = new \CoinRPC(getenv('rpc_user'), getenv('rpc_pass'));
+			if($this->coin_connection->error != "") {
+				$this->showError($this->coin_connection->error);
+			}
 		}
 		
 		function getUtxo($address) {
+			if(!($this->validateAddress($address))) {
+				return "";
+			}
 			//TODO: сделать что-то другое и универсальное
 			//возможно, для cryptoID вынести параметры куда-нибудь
 			$api_url = $this->cryptoID_url . "&q=unspent&active=" . $address;
@@ -37,19 +63,29 @@
 		}
 		
 		function getbalance($address) {
-			//временное решение
-			$api_url = "https://block2.mfcoin.net/ext/getbalance/" . $address;
-			$result = \Alicanto\Utilities::curl_get($api_url);
+			$result = "0";
+			if($this->validateAddress($address)) {
+				$api_url = "https://block2.mfcoin.net/ext/getbalance/" . $address;
+				$result = \Alicanto\Utilities::curl_get($api_url);
+			}
 			return $result;
 		}
 		
 		function sendTx($rawtx) {
 			$this->coin_connect();
-			//TODO: проверку ошибок подключения по rpc
-			echo $this->coin_connection->sendrawtransaction($rawtx);
+			$tx_id = $this->coin_connection->sendrawtransaction($rawtx);
+			//if($tx_id == "") {
+			//	$this->showError("Invalid rawtx or wallet error");
+			//}
+			return json_encode([
+				'txid' => $tx_id
+			]);
 		}
 		
 		function getLastTxs($address) {
+			if(!($this->validateAddress($address))) {
+				return "";
+			}
 			$api_url = "https://block2.mfcoin.net/ext/getaddress/" . $address;
 			$result = \Alicanto\Utilities::curl_get($api_url);
 			//TODO: проверку json
