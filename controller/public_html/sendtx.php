@@ -7,8 +7,8 @@
 	$enviro = new \Alicanto\Environment();
 	$logic  = new \Alicanto\Logic();
 	
-	$address = Utils::data_filter($_GET['addr']);
-	//TODO: verify address
+	$rawtx = Utils::data_filter($_POST['rawtx']);
+	//TODO: verify rawtx
 	
-	echo $logic->getUtxo($address);
+	echo $logic->sendTx($rawtx);
 	

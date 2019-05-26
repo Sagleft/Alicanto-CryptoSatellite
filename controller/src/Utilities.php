@@ -9,12 +9,13 @@
 			$string = trim($string);
 			if($useDB && $db != null) {
 				if($db == null) {
-					$string = mysql_real_escape_string($string);
+					//TODO
+					//$string = mysqli_real_escape_string($string);
 				} else {
-					$string = mysql_real_escape_string($string, $db);
+					//$string = mysqli_real_escape_string($string, $db);
 				}
 			} else {
-				$string = mysql_escape_string($string);
+				//$string = mysqli_escape_string($string);
 			}
 			return $string;
 		}

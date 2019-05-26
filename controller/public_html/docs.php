@@ -5,7 +5,7 @@
 	
 	$enviro = new AppEnvironment();
 	$render = new AppRender([
-		'tag'  => 'home',
+		'tag'  => 'docs',
 		'host' => 'http://satellite/',
 		'coin' => 'MFCoin'
 	]);
