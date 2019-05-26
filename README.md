@@ -20,6 +20,7 @@
 git clone https://github.com/Sagleft/Alicanto-CryptoSatellite.git alicanto
 cd alicanto
 mkdir view/cache
+mv model/.env.example model/.env
 cd controller
 composer update
 ```
