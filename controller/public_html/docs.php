@@ -6,7 +6,7 @@
 	$enviro = new AppEnvironment();
 	$render = new AppRender([
 		'tag'  => 'docs',
-		'host' => 'http://satellite/',
+		'host' => getenv('host'),
 		'coin' => 'MFCoin'
 	]);
 	$render->twigRender();
