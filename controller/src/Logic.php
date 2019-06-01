@@ -65,7 +65,8 @@
 		function getbalance($address) {
 			$result = "0";
 			if($this->validateAddress($address)) {
-				$api_url = "https://block2.mfcoin.net/ext/getbalance/" . $address;
+				//$api_url = "https://block2.mfcoin.net/ext/getbalance/" . $address;
+				$api_url = "https://chainz.cryptoid.info/mfc/api.dws?q=getbalance&a=" . $address;
 				$result = \Alicanto\Utilities::curl_get($api_url);
 				if(\Alicanto\Utilities::isJson($result)) {
 					$result = "0";
