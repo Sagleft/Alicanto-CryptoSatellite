@@ -30,3 +30,9 @@ composer update
 [Alicanto CryptoSatellite](https://github.com/Sagleft/Alicanto-CryptoSatellite) (c) 2019 Sagleft
 
 [Skeleton WebTemplate](https://github.com/dhg/Skeleton) (c) 2011-2014 Dave Gamache
+
+---
+
+![image](https://github.com/Sagleft/Sagleft/raw/master/image.png)
+
+### :globe_with_meridians: [Telegram канал](https://t.me/+VIvd8j6xvm9iMzhi)
